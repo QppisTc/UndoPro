@@ -75,8 +75,8 @@ namespace UndoPro
 			Undo.undoRedoPerformed += UndoRedoPerformed;
 			EditorApplication.update -= Update;
 			EditorApplication.update += Update;
-			EditorApplication.playModeStateChanged -= PlaymodeStateChange;
-			EditorApplication.playModeStateChanged += PlaymodeStateChange;
+			EditorApplication.playmodeStateChanged -= PlaymodeStateChange;
+			EditorApplication.playmodeStateChanged += PlaymodeStateChange;
 
 			// Fetch Reflection members for Undo interaction
 			Assembly UnityEditorAsssembly = Assembly.GetAssembly (typeof(UnityEditor.Editor));
@@ -135,7 +135,7 @@ namespace UndoPro
 			// Unsubscribe from every event
 			Undo.undoRedoPerformed -= UndoRedoPerformed;
 			EditorApplication.update -= Update;
-			EditorApplication.playModeStateChanged -= PlaymodeStateChange;
+			EditorApplication.playmodeStateChanged -= PlaymodeStateChange;
 
 			// Discard now unused objects
 			dummyObject = null;
@@ -243,9 +243,8 @@ namespace UndoPro
 			lastFrameUndoRedoPerformed = false;
 		}
 
-		private static void PlaymodeStateChange(PlayModeStateChange change)
+		private static void PlaymodeStateChange()
 		{
-			if (change == PlayModeStateChange.EnteredEditMode)
 				UpdateUndoRecords();
 		}
 
